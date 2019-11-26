@@ -7,29 +7,27 @@ var connection = require("./connection.js");
 // These help avoid SQL injection
 // https://en.wikipedia.org/wiki/SQL_injection
 var orm = {
-  selectaAll: function(tableInput, colToSearch, valOfCol) {
-    var queryString = "SELECT * FROM ?? WHERE ?? = ?";
-    connection.query(queryString, [tableInput, colToSearch, valOfCol], function(err, result) {
+  selectaAll: function(tableInput) {
+    var queryString = "SELECT * FROM ??";
+    connection.query(queryString, [tableInput], function(err, result) {
       if (err) throw err;
       console.log(result);
     });
   },
-  insertOne: function(whatToSelect, table, orderCol) {
-    var queryString = "SELECT ?? FROM ?? ORDER BY ?? DESC";
-    console.log(queryString);
-    connection.query(queryString, [whatToSelect, table, orderCol], function(err, result) {
-      if (err) throw err;
-      console.log(result);
-    });
-  },
-  updateOne: function(tableOneCol, tableTwoForeignKey, tableOne, tableTwo) {
-    var queryString =
-      "SELECT ??, COUNT(??) AS count FROM ?? LEFT JOIN ?? ON ??.??= ??.id GROUP BY ?? ORDER BY count DESC LIMIT 1";
 
-    connection.query(
-      queryString,
-      [tableOneCol, tableOneCol, tableOne, tableTwo, tableTwo, tableTwoForeignKey, tableOne, tableOneCol],
-      function(err, result) {
+  insertOne: function(table, name) {
+    var queryString = "INSERT into ?? VALUES ?";
+    console.log(queryString);
+    connection.query(queryString, [table, name], function(err, result) {
+      if (err) throw err;
+      console.log(result);
+    });
+  },
+
+  updateOne: function(table, name, status, id) {
+    var queryString =
+      "UPDATE ?? SET burger_name = ?, devoured = ? WHERE id = ? ";
+    connection.query(queryString, [table, name, status, id], function(err, result) {
         if (err) throw err;
         console.log(result);
       }

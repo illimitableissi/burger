@@ -1,11 +1,11 @@
 INSERT INTO burgers (burger_name, devoured)
-VALUES ("bacon cheeseburger", 2);
+VALUES ("bacon cheeseburger", true);
+
+INSERT INTO burgers (burger_name)
+VALUES ("cheeseburger");
 
 INSERT INTO burgers (burger_name, devoured)
-VALUES ("cheeseburger", 10);
+VALUES ("triple stack", true);
 
-INSERT INTO burgers (burger_name, devoured)
-VALUES ("triple stack", 5);
-
-INSERT INTO burgers (burger_name, devoured)
-VALUES ("regular", 7);
+INSERT INTO burgers (burger_name)
+VALUES ("regular");
