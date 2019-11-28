@@ -4,8 +4,7 @@ var connection = require("./connection.js");
 
 // The ?? signs are for swapping out table or column names
 // The ? signs are for swapping out other values
-// These help avoid SQL injection
-// https://en.wikipedia.org/wiki/SQL_injection
+
 var orm = {
   selectAll: function(tableInput) {
     var queryString = "SELECT * FROM ??";
