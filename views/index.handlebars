@@ -34,7 +34,9 @@
                           <ul align="center">
                             {{#each burgers}}
                              {{#if devoured}}
+                             <li>
                                <span>{{this.id}} - {{this.burger_name}}</span>
+                              </li>
                             {{/if}}
                              {{/each}}
                         </ul>
@@ -44,8 +46,7 @@
     </div>
 </div>
 
-{{!-- <script type="text/javascript">
-// Make sure we wait to attach our handlers until the DOM is fully loaded.
+<script type="text/javascript">
 $(function() {
   $(".submit-button").on("click", function(event) {
     // Make sure to preventDefault on a submit event.
@@ -53,6 +54,7 @@ $(function() {
 
     var newBurger = {
       burger_name: $("#burger-name").val().trim(),
+      devoured: 0
     };
 
     // Send the POST request.
@@ -61,13 +63,30 @@ $(function() {
       data: newBurger
     }).then(
       function() {
-        console.log("created new burger");
+        console.log("added new burger");
         // Reload the page to get the updated list
         location.reload();
       }
     );
-  }); --}}
+  });
 
+  $(".eat-button").on("click", function(event) {
+        event.preventDefault();
 
-
+        var id = $(this).data("id");
+        var devouredState = {
+            devoured: 1
+        };
+        $.ajax("/api/burgers/" + id, {
+            type: "PUT",
+            data: devouredState
+          }).then(
+            function() {
+              console.log("burger eaten");
+              // Reload the page to get the updated list
+              location.reload();
+            }
+          );
+     })
+});
 </script>
